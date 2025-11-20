@@ -3,15 +3,15 @@ import LogosAnimadas from "../components/LogosAnimadas";
 import CartaoResponsivo from "../components/CartaoResponsivo";
 import Particulas from "../components/Particulas";
 import GradualBlur from "../components/GradualBlur";
-import ScrollReveal from "../components/ScrollReveal";
 import ProfileCard from "../components/ProfileCard";
 import RobotSection from "../components/RobotSection";
-import Stack from "../components/Stack";
 import reactLogo from "../assets/simbolos/React.png";
 import gsapLogo from "../assets/simbolos/GSAP.png";
 import splineLogo from "../assets/simbolos/Spline.png";
 import tailwindLogo from "../assets/simbolos/tailwind.png";
 import viteLogo from "../assets/simbolos/vite-js-logo.png";
+import ConfigForm from "../components/ConfigForm";
+
 
 
 import ArthurAvatar from "../assets/Arthur.png";
@@ -126,6 +126,10 @@ export default function Home() {
         </div>
       </section>
       <RobotSection />
+
+        {/* FORMULÁRIO DE CONFIGURAÇÃO */}
+            <ConfigForm />
+
     {/* DESENVOLVEDORES */}
       <section id="devs" className="px-6 py-24">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
