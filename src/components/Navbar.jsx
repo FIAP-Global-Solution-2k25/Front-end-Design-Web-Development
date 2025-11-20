@@ -1,45 +1,68 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/PosturAI-LOGO.png";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
-  return (
-    <nav
-      className="fixed left-1/2 top-8 flex w-fit -translate-x-1/2 items-center gap-6
-                 rounded-lg border border-neutral-700 bg-neutral-900 px-4 py-2
-                 text-sm text-neutral-300"
-    >
-      {/* Logo + título */}
-      <Link to="/" className="flex items-center gap-2 hover:opacity-80">
-        <img src={logo} alt="Logo PosturAI" className="h-10" />
-        <h1 className="font-bold text-xl text-neutral-50">PosturAI</h1>
-      </Link>
+    const location = useLocation();
 
-      {/* Links */}
-      <div className="flex items-center gap-4">
-        <Link to="/" className="flex h-[20px] items-center hover:text-neutral-50">
-          Home
-        </Link>
+    const linkBase = `
+        relative 
+        after:absolute after:left-0 after:bottom-[-2px] 
+        after:h-[2px] after:w-0 after:bg-[#AFC7FF] 
+        hover:after:w-full 
+        hover:text-[#AFC7FF]
+        transition-all duration-00
+    `;
 
-        <Link
-          to="/download"
-          className="
-            relative z-0 flex items-center gap-2 overflow-hidden whitespace-nowrap
-            rounded-lg border border-neutral-700 px-4 py-1.5 font-medium
-            text-neutral-300 transition-all duration-300
-            before:absolute before:inset-0 before:-z-10 before:translate-y-full
-            before:scale-[2.5] before:rounded-full before:bg-neutral-50
-            before:transition-transform before:duration-1000 before:content-['']
-            hover:scale-105 hover:border-neutral-50 hover:text-neutral-900
-            hover:before:translate-y-0 active:scale-100
-          "
+    const activeLink = `
+        text-[#AFC7FF]
+        after:w-full 
+        font-semibold
+        drop-shadow-[0_0_6px_rgba(150,180,255,0.6)]
+    `;
+
+    return (
+        <nav
+            className="
+                fixed top-0 left-0 
+                w-full z-50 
+                bg-transparent
+                px-6 py-4
+                flex justify-around items-center
+            "
         >
-          Download
-        </Link>
 
-        <Link to="/about" className="flex h-[20px] items-center hover:text-neutral-50">
-          About
-        </Link>
-      </div>
-    </nav>
-  );
+            {/* LOGO */}
+            <Link to="/" className="pointer-events-auto">
+                <h1 className="font-bold text-xl tracking-tight text-white">
+                    <span className="text-[#AFC7FF]">Postur</span>
+                    <span className="text-white/90">AI</span>
+                </h1>
+            </Link>
+
+            {/* LINKS */}
+            <div className="flex gap-6 items-center text-lg font-semibold text-white/80 pointer-events-auto">
+
+                <Link
+                    to="/"
+                    className={`${linkBase} ${location.pathname === "/" ? activeLink : ""}`}
+                >
+                    Home
+                </Link>
+
+                <Link
+                    to="/download"
+                    className={` ${linkBase} ${location.pathname === "/download" ? activeLink : ""}`}
+                >
+                    Download
+                </Link>
+
+                <Link
+                    to="/about"
+                    className={`${linkBase} ${location.pathname === "/about" ? activeLink : ""}`}
+                >
+                    Sobre nós
+                </Link>
+
+            </div>
+        </nav>
+    );
 }
