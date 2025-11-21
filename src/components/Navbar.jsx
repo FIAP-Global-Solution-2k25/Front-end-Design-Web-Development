@@ -10,31 +10,33 @@ export default function Navbar() {
     const localizacao = useLocation();
     const [menuAberto, setMenuAberto] = useState(false);
 
-    // 🔵 SCROLL PARA O HOME — cinematográfico
+    // HOME COM EFEITO
     const scrollParaHome = () => {
         gsap.to(window, {
             duration: 1.2,
             ease: "slow(0.7, 1.4, 0.7)",
-            scrollTo: {
-                y: 0,
-                offsetY: 0
-            }
+            scrollTo: { y: 0 }
         });
-
         setMenuAberto(false);
     };
 
-    // 🔵 SCROLL PARA SOBRE NÓS — cinematográfico
+    // SOBRE NÓS EFEITO TAMBÉM
     const scrollParaSobreNos = () => {
         gsap.to(window, {
-            duration: 1.2,                         
-            ease: "slow(0.7, 1.5, 0.7)",       
-            scrollTo: {
-                y: "#sobre-nos",
-                offsetY: 120                 
-            }
+            duration: 1.2,
+            ease: "slow(0.7, 1.5, 0.7)",
+            scrollTo: { y: "#sobre-nos", offsetY: 120 }
         });
+        setMenuAberto(false);
+    };
 
+    // SCROLL BONITAO PRA TELA DE TUTORIAL
+    const scrollParaTutorial = () => {
+        gsap.to(window, {
+            duration: 1.2,
+            ease: "slow(0.7, 1.5, 0.7)",
+            scrollTo: { y: "#tutorial", offsetY: 120 }
+        });
         setMenuAberto(false);
     };
 
@@ -58,19 +60,16 @@ export default function Navbar() {
         localizacao.pathname === rota ? linkAtivo : "";
 
     return (
-        <nav
-            className="
-                fixed top-0 left-0 
-                w-full z-50 
-                bg-transparent
-                px-6 py-4
+        <nav className="
+                fixed top-0 left-0 w-full z-50 
+                bg-transparent px-6 py-4
                 flex justify-between items-center
             "
         >
 
-            {/* LOGO → agora rola suavemente pro topo */}
+            {/* LOGO (COM EFEITO TAMBEM)*/}
             <button onClick={scrollParaHome} className="pointer-events-auto">
-                <h1 className="font-bold text-xl tracking-tight text-white">
+                <h1 className="font-bold text-xl tracking-tight text-white hover:cursor-pointer">
                     <span className="text-[#AFC7FF]">Postur</span>
                     <span className="text-white/90">AI</span>
                 </h1>
@@ -87,28 +86,17 @@ export default function Navbar() {
             {/* LINKS DESKTOP */}
             <div className="hidden md:flex gap-6 items-center text-lg font-semibold text-white/80 pointer-events-auto">
 
-                {/* HOME → scroll suave */}
-                <button
-                    onClick={scrollParaHome}
-                    className={`${linkBase} cursor-pointer`}
-                >
+                <button onClick={scrollParaHome} className={`${linkBase} cursor-pointer`}>
                     Home
                 </button>
 
-                {/* SOBRE NÓS → scroll suave */}
-                <button
-                    onClick={scrollParaSobreNos}
-                    className={`${linkBase} cursor-pointer`}
-                >
+                <button onClick={scrollParaSobreNos} className={`${linkBase} cursor-pointer`}>
                     Quem Somos
                 </button>
 
-                <Link
-                    to="/download"
-                    className={`${linkBase} ${ehAtivo("/download")}`}
-                >
+                <button onClick={scrollParaTutorial} className={`${linkBase} cursor-pointer`}>
                     Tutorial
-                </Link>
+                </button>
             </div>
 
             {/* MENU MOBILE */}
@@ -126,29 +114,17 @@ export default function Navbar() {
 
                     <div className="flex flex-col items-center gap-6 text-2xl font-semibold text-white/90">
                         
-                        {/* HOME MOBILE */}
-                        <button
-                            onClick={scrollParaHome}
-                            className={`${linkBase}`}
-                        >
+                        <button onClick={scrollParaHome} className={`${linkBase}`}>
                             Home
                         </button>
 
-                        {/* SOBRE NÓS MOBILE */}
-                        <button
-                            onClick={scrollParaSobreNos}
-                            className={`${linkBase}`}
-                        >
+                        <button onClick={scrollParaSobreNos} className={`${linkBase}`}>
                             Quem Somos
                         </button>
 
-                        <Link 
-                            to="/download" 
-                            onClick={() => setMenuAberto(false)}
-                            className={`${linkBase}`}
-                        >
+                        <button onClick={scrollParaTutorial} className={`${linkBase}`}>
                             Tutorial
-                        </Link>
+                        </button>
 
                     </div>
                 </div>

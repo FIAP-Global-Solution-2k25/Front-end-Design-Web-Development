@@ -15,11 +15,17 @@ import DownloadEXE from "../components/DownloadEXE.jsx";
 import ScrollReveal from '../components/ScrollReveal.jsx';
 import SobreNos from "../components/SobreNos.jsx";
 import Footer from "../components/Footer";
+import SecaoDownload from "../components/SecaoDownload";
+import Tutorial from "../components/Tutorial";
 
 import ArthurAvatar from "../assets/Integrantes/Arthur.png";
 import BerlofaAvatar from "../assets/Integrantes/Berlofa.png";
 import UlissesAvatar from "../assets/Integrantes/Ulisses.png";
 import FeaturesSection from "../components/FeaturesSection";
+
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function Home() {
   return (
@@ -42,7 +48,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ESCURECER FUNDO */}
+      {/* DIV PRA ESCURECER  O FUNDO */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
 
       {/* HERO */}
@@ -79,12 +85,27 @@ export default function Home() {
           {/* BOTAO ANCORA PRO DOWNLOAD */}
             <CartaoResponsivo className="px-0 py-0">
             <a
-                href="/download"
-                className="relative px-11 py-5 text-xl text-center text-white bg- backdrop-blur-lg border hover:border-[#AFC7FF] border-white/20 rounded-xl transition-all duration-300 flex items-center justify-center"
+                href="#"
+                onClick={(e) => {
+                e.preventDefault();
+                gsap.to(window, {
+                    duration: 1.4,
+                    ease: "slow(0.7, 1.5, 0.7)",
+                    scrollTo: {
+                    y: "#download-app",
+                    offsetY: 80
+                    }
+                });
+                }}
+                className="relative px-11 py-5 text-xl text-center text-white 
+                        backdrop-blur-lg border hover:border-[#AFC7FF] 
+                        border-white/20 rounded-xl transition-all duration-300 
+                        flex items-center justify-center cursor-pointer"
             >
                 Baixe Aqui
             </a>
             </CartaoResponsivo>
+
 
             {/* SAIBA MAIS */}
             <CartaoResponsivo className="px-0 py-0">
@@ -130,6 +151,10 @@ export default function Home() {
       <SobreNos id="sobre-nos" />
 
       <FeaturesSection />
+
+      <SecaoDownload />
+
+      <Tutorial />
 
       {/* FORM */}
       <ConfigForm />

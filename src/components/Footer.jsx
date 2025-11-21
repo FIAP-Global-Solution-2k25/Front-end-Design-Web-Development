@@ -25,9 +25,18 @@ export default function Footer() {
     });
   };
 
+  const scrollParaTutorial = () => {
+    gsap.to(window, {
+      duration: 1.5,
+      ease: "slow(0.7, 1.4, 0.7)",
+      scrollTo: { y: "#tutorial", offsetY: 120 }
+    });
+  };
+
   return (
     <footer className="w-full mt-32 bg-black border-t border-white/10 py-12 px-6 relative overflow-hidden">
 
+      {/* Fundo suave */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute w-72 h-72 bg-[#AFC7FF] blur-3xl rounded-full -top-20 -left-10"></div>
         <div className="absolute w-64 h-64 bg-[#6F8DFF] blur-3xl rounded-full bottom-0 right-0"></div>
@@ -35,19 +44,24 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto relative z-10 grid md:grid-cols-3 gap-12">
 
-        {/* Logo + descrição */}
+        {/* Logo com scroll para Home */}
         <div className="flex flex-col gap-4">
-          <img 
+            
+        <button onClick={scrollParaHome} className="w-fit">
+            <img 
             src={Logo}
             alt="PosturAI Logo"
-            className="w-20 opacity-90 drop-shadow-[0_0_12px_rgba(150,180,255,0.45)]"
-          />
-          <p className="text-white/70 text-sm leading-relaxed max-w-xs">
+            className="w-20 opacity-90 cursor-pointer hover:opacity-100 transition drop-shadow-[0_0_12px_rgba(150,180,255,0.45)]"
+            />
+        </button>
+
+        <p className="text-white/70 text-sm leading-relaxed max-w-xs">
             Cuidar da sua postura hoje é investir na sua saúde amanhã, e claro, com o PosturAI ao seu lado.
-          </p>
+        </p>
+
         </div>
 
-        {/* Navegação — ORDEM AJUSTADA */}
+        {/* Navegação */}
         <div className="flex flex-col gap-3 text-white/80 text-lg">
           <h3 className="font-semibold text-white mb-2">Navegação</h3>
 
@@ -67,10 +81,13 @@ export default function Footer() {
             Quem somos
           </button>
 
-          {/* TUTORIAL */}
-          <Link to="/download" className="hover:text-[#AFC7FF] transition">
+          {/* TUTORIAL COM SCROLL SUAVE */}
+          <button
+            onClick={scrollParaTutorial}
+            className="text-left hover:text-[#AFC7FF] transition"
+          >
             Tutorial
-          </Link>
+          </button>
         </div>
 
         {/* Redes sociais */}
