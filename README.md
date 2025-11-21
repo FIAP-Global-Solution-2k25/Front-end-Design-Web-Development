@@ -1,6 +1,4 @@
-<p align="center">
-  # 🌐 PosturAI — Landing Page Oficial
-</p>
+# 🌐 PosturAI — Landing Page do Sistema de Monitoramento de Postura
 
 <p align="center">
   <img src="https://img.shields.io/badge/FIAP%20Global%20Solution%202K25-2%C2%BA%20Semestre-blue?style=for-the-badge&logo=github&logoColor=white" alt="Global Solution 2K25 Badge">
