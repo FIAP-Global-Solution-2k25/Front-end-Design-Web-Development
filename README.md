@@ -68,7 +68,7 @@ Para ter a Landing Page rodando em sua máquina, siga os passos abaixo:
 
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/FIAP-Global-Solution-2k25/PosturAI-Website.git](https://github.com/FIAP-Global-Solution-2k25/PosturAI-Website.git)
+    git clone https://github.com/FIAP-Global-Solution-2k25/PosturAI-Website.git
     ```
 2.  Navegue até o diretório do projeto:
     ```bash
