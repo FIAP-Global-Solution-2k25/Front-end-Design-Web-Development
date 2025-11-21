@@ -7,12 +7,13 @@ const initialConfig = {
     tem_cadeira_iot: false,
     ip_cadeira_iot: "0.tcp.sa.ngrok.io:13950",
     id_cadeira_iot: "Chair:001",
-    atraso_vibracao: 10,
+    atraso_vibracao: 5000
   },
   interface: {
     janela_sempre_topo: true,
     gerar_grafico_apos_encerramento: true,
-  },
+    id_webcam: 0
+  }
 };
 
 export default function ConfigForm() {
@@ -50,11 +51,40 @@ export default function ConfigForm() {
     }));
   };
 
-  // se quiser “enviar” depois, aqui já está o JSON pronto
+  // Funções para Download do JSON
+  const handleDownloadJson = () => {
+    // 1. Converte o objeto JavaScript em uma string JSON formatada (indentação 2)
+    const jsonString = JSON.stringify(config, null, 2); 
+    
+    // 2. Cria um Blob (bloco de dados) a partir da string JSON, definindo o tipo MIME
+    const blob = new Blob([jsonString], { type: 'application/json' }); 
+    
+    // 3. Cria um URL de objeto temporário
+    const url = URL.createObjectURL(blob);
+    
+    // 4. Cria um link (<a>) em memória
+    const link = document.createElement('a');
+    link.href = url;
+    
+    // 5. Define o nome do arquivo que será baixado
+    link.download = 'preferences.json'; 
+    
+    // 6. Simula o clique para iniciar o download
+    document.body.appendChild(link);
+    link.click();
+    
+    // 7. Limpeza: remove o link e revoga o URL de objeto para liberar memória
+    link.parentNode.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    console.log("Download do arquivo 'preferences.json' iniciado.");
+  };
+
+  // Se quiser “enviar” depois, aqui já está o JSON pronto
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Config JSON:", config);
-    alert("Configuração gerada! Veja o JSON abaixo ou no console.");
+    console.log("Config JSON pronto para submissão/processamento:", config);
+    // Removi o alert() e deixei apenas o log.
   };
 
   return (
@@ -131,10 +161,7 @@ export default function ConfigForm() {
                 Use o endereço público ou IP local da cadeira.
               </p>
             </div>
-          </div>
-
-          {/* COLUNA 2 – Hardware extra & Interface */}
-          <div className="space-y-6">
+            
             {/* ID da cadeira */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
@@ -165,6 +192,30 @@ export default function ConfigForm() {
                 )}
                 className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
               />
+            </div>
+          </div>
+
+          {/* COLUNA 2 – Hardware extra & Interface */}
+          <div className="space-y-6">
+            {/* ID da Webcam */}
+            <div>
+              <label className="block font-medium mb-2 text-white/90">
+                ID da Webcam (0 para a câmera padrão)
+              </label>
+              <input
+                type="number"
+                min={0}
+                value={config.interface.id_webcam}
+                onChange={handleNestedChange(
+                  "interface",
+                  "id_webcam",
+                  (v) => Number(v) || 0
+                )}
+                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+              />
+              <p className="text-xs text-white/50 mt-1">
+                Geralmente 0 é a câmera embutida no notebook.
+              </p>
             </div>
 
             {/* Janela sempre no topo */}
@@ -206,11 +257,20 @@ export default function ConfigForm() {
             </div>
           </div>
 
-          {/* BOTÃO ENVIAR – largura total */}
-          <div className="md:col-span-2 flex justify-end mt-2">
+          {/* BOTÕES – largura total */}
+          <div className="md:col-span-2 flex justify-end mt-2 space-x-4">
+            {/* BOTÃO DE DOWNLOAD */}
+            <button
+              type="button" // Important: use type="button" to prevent form submission
+              onClick={handleDownloadJson}
+              className="px-6 py-2.5 rounded-xl border border-cyan-500 text-cyan-400 font-semibold transition-colors duration-200 hover:bg-cyan-500/10 shadow-lg"
+            >
+              Baixar Arquivo .json
+            </button>
+            {/* BOTÃO DE SUBMISSÃO */}
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-colors duration-200"
+              className="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-colors duration-200 shadow-lg"
             >
               Gerar configuração
             </button>
@@ -220,10 +280,10 @@ export default function ConfigForm() {
         {/* JSON GERADO */}
         <div className="mt-8">
           <h3 className="text-lg font-semibold text-white/90 mb-2">
-            JSON gerado
+            JSON gerado (Pré-visualização)
           </h3>
           <pre className="w-full bg-black/70 border border-white/10 rounded-2xl p-4 text-xs md:text-sm text-green-300 overflow-x-auto">
-{JSON.stringify(config, null, 4)}
+            {JSON.stringify(config, null, 4)}
           </pre>
         </div>
       </div>
