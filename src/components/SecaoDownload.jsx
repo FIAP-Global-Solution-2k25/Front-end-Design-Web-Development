@@ -57,7 +57,7 @@ export default function SecaoDownload() {
               Disponível para Windows 🖥️
             </h3>
 
-            {/* Botão de download original */}
+            {/* Botão de download */}
             <div className="scale-110">
               <DownloadEXE />
             </div>

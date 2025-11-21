@@ -564,23 +564,21 @@
 }
 
 .pc-avatar-content .avatar {
-  filter: none;                  /* garante que não tem extra de brilho */
+  filter: none;
 }
 
-/* 2) Shine MUITO mais discreto */
 .pc-shine {
   filter: brightness(0.6) contrast(1) saturate(0.2);
-  opacity: 0.75;                 /* brilho bem baixinho */
-  mix-blend-mode: normal;        /* sem color-dodge forte */
+  opacity: 0.75;
+  mix-blend-mode: normal;
 }
 
 .pc-shine::before,
 .pc-shine::after {
-  opacity: 0.30;                 /* quase só um “tchamzinho” */
-  mix-blend-mode: soft-light;    /* mistura bem suave */
+  opacity: 0.30;
+  mix-blend-mode: soft-light;
 }
 
-/* Quando passar o mouse, ainda aumenta um pouco, mas sem estourar */
 .pc-card:hover .pc-shine,
 .pc-card.active .pc-shine {
   filter: brightness(6) contrast(5) saturate(0.3);
@@ -593,7 +591,6 @@
   opacity: 0.25;
 }
 
-/* 3) Glare ainda mais leve */
 .pc-glare {
   background-image: radial-gradient(
     farthest-corner circle at var(--pointer-x) var(--pointer-y),
@@ -606,7 +603,6 @@
   opacity: 0.6;
 }
 
-/* 4) Glow atrás do card bem discreto */
 .pc-behind {
   filter: blur(40px) saturate(0.9);
   opacity: calc(0.4 * var(--card-opacity));

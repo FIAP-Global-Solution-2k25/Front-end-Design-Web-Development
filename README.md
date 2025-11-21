@@ -1,85 +1,112 @@
-# 🌐 PosturAI — Landing Page do Sistema de Monitoramento de Postura
-
+# 🌐 PosturAI - Landing Page e Módulo de Configuração (Web)
 <p align="center">
-  <img src="https://img.shields.io/badge/FIAP%20Global%20Solution%202K25-2%C2%BA%20Semestre-blue?style=for-the-badge&logo=github&logoColor=white" alt="Global Solution 2K25 Badge">
+  <img src="https://img.shields.io/badge/FIAP%20Global%20Solution%202K25-Landing%20Page-007ACC?style=for-the-badge&logo=react&logoColor=white" alt="Global Solution 2K25 Badge">
 </p>
 
-**Interface moderna, microinterações responsivas e experiência sensorial orientada à curiosidade.**
-
-O repositório abriga o código-fonte da **Landing Page oficial do PosturAI**, uma plataforma criada para apresentar o aplicativo, contextualizar sua proposta de valor, fornecer tutorial de uso, permitir o download do software e disponibilizar um configurador inteligente para gerar o arquivo de preferências do usuário.
-
-A essência desse site não é apenas exibir conteúdo — é conduzir o visitante por um **fluxo emocional**, despertando **curiosidade** e incentivando a **exploração contínua** através de efeitos dinâmicos, partículas animadas, transições suaves e microinterações responsivas.
-
----
-
-## ✨ Visão Geral do Projeto
-
-A Landing Page do PosturAI foi construída com foco em três pilares fundamentais, garantindo uma experiência de usuário **imersiva** e **cativante**:
-
-1.  **Experiência Sensorial**
-    > Tudo é vivo.
-    A homepage abre com um fundo dinâmico de **partículas em movimento**, criando uma atmosfera leve, tecnológica e imersiva.
-2.  **Curiosidade Guiada**
-    > Nenhum elemento entrega tudo de imediato.
-    Textos diretos e "mini gatilhos" mentais calculados. As seções se complementam visualmente e conceitualmente, incentivando a exploração contínua.
-3.  **Microinterações Inteligentes**
-    > Botões, cartões, partículas e seções reagem ao usuário.
-    A sensação transmitida é: **“mexer no site é gostoso.”** Aumentando o tempo de permanência e o engajamento.
-
----
-
-## 🏛️ Tecnologias Utilizadas
-
-O projeto utiliza um *stack* moderno e otimizado para performance e animações ricas:
-
-* **React.js**: Biblioteca principal para construção da interface.
-* **TailwindCSS**: Framework CSS utilitário (com design system próprio do projeto).
-* **GSAP + ScrollToPlugin**: Para animações **cinematográficas** e âncoras suaves.
-* **OGL (WebGL lightweight)**: Para renderizar o sistema de **partículas animadas** de fundo.
-* **ScrollReveal (customizado)**: Para gerenciar animações de entrada de elementos.
-* Ícones React e React Router DOM.
-
----
-
-## 🎨 Principais Características
-
-| Seção/Funcionalidade | Destaques |
-| :--- | :--- |
-| **Homepage Cinemática** | Fundo com partículas vivas, efeitos discretos de *glow*, *scrolls* extremamente suaves (*ease slow curve*) e microinterações em botões e *cards*. |
-| **Seção “Sobre Nós”** | Texto instigante, estrutura narrativa e **Linha do tempo visual** moderna com efeito de **revelação progressiva**. |
-| **Seção “Download”** | Área centralizada com **cartão animado**, botão principal ampliado e design focado na **conversão** do visitante. |
-| **Seção “Tutorial”** | Vídeo embutido em container moderno (*blur* e borda luminosa) e **cards animados** para as etapas de configuração. |
-| **Seção “Configurar Preferências”** | **Formulário inteligente** que gera um **JSON pronto** para o PosturAI, com pré-visualização em tempo real e download automático do arquivo. |
-| **Footer Dinâmico** | *Glow* suave de fundo, *scroll* suave para navegação rápida e links sociais animados. |
+> Repositório dedicado ao desenvolvimento da **Landing Page Oficial** do projeto PosturAI. Esta página serve como ponto central para apresentação da solução, download de arquivos e fornecimento de instruções detalhadas de configuração para o usuário final.
 
 ---
 
 ## 👥 Autores
 
-* **Ulisses Ribeiro (RM562230)** — Desenvolvimento *core* e arquitetura técnica da solução em Visão Computacional.
-* **Arthur Berlofa Bosi (RM564438)** — Responsável pela integração IoT (ESP32) e pela gestão de configuração via arquivos JSON.
-* **Arthur Ferreira (RM564958)** — Responsável pela organização das pastas e planejamento do software.
+- **Ulisses Ribeiro - RM562230** — Desenvolvimento *core* e arquitetura técnica da solução em Visão Computacional.
+- **Arthur Berlofa Bosi - RM564438** — Responsável pela integração IoT (ESP32) e pela gestão de configuração via arquivos JSON.
+- **Arthur Ferreira - RM564958** - Responsavel pela organização das pastas, e planejamento do software.
 
 ---
 
-## 🔧 Como rodar o projeto localmente
+## 💡 Sobre o Módulo Web
+Este módulo atua como a face pública e o centro de suporte do projeto PosturAI. Ele foca em:
 
-Para ter a Landing Page rodando em sua máquina, siga os passos abaixo:
+1.  **Apresentação:** Explicar a proposta de valor do PosturAI (cadeira inteligente e monitoramento de postura).
+2.  **Suporte:** Guiar o usuário no processo de instalação do sistema de IA (PosturAI-Python).
+3.  **Configuração Simplificada:** Oferecer uma interface amigável para gerar o arquivo de configuração **`preferences.json`** que será utilizado pelo módulo de IA.
 
-1.  Clone o repositório:
-    ```bash
-    git clone https://github.com/FIAP-Global-Solution-2k25/PosturAI-Website.git
-    ```
-2.  Navegue até o diretório do projeto:
-    ```bash
-    cd posturai-landing-page
-    ```
-3.  Instale as dependências:
-    ```bash
-    npm install
-    ```
-4.  Inicie o servidor de desenvolvimento:
-    ```bash
-    npm run dev
-    ```
-Acesse o projeto através do seu navegador em: **`http://localhost:5173/`**
+---
+
+## ✨ Recursos Principais da Landing Page
+* **Apresentação de Vídeo/Demonstração:** Exibição do conceito do produto e sua aplicação.
+* **Download Direto do Sistema de IA:** Link para o pacote de instalação do repositório `PosturAI-Python`.
+* **Gerador de Configuração:** Formulário interativo para o usuário inserir credenciais (MQTT Broker, Limites de Alerta, Intensidade de Monitoramento) e gerar o arquivo **`preferences.json`** customizado.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+A escolha da tecnologia prioriza a velocidade de carregamento, design responsivo e facilidade de geração de formulários:
+
+| Categoria | Tecnologia |
+| :--- | :--- |
+| **Framework** | **React** | 
+| **Linguagem** | **JavaScript (ES6+)** |
+| **Estilização** | **Tailwind CSS** |
+| **Build Tool** | **Vite** |
+
+---
+
+## 🚀 Instalação e Execução
+
+Para rodar a Landing Page localmente:
+
+### 1. Pré-requisitos
+Certifique-se de ter o **Node.js** e o **npm** instalados.
+
+### 2. Clonar o Repositório
+```bash
+git clone https://github.com/FIAP-Global-Solution-2k25/Front-end-Design-Web-Development.git
+
+cd Front-end-Design-Web-Development
+````
+
+### 3\. Instalar Dependências
+
+```bash
+npm install 
+```
+
+### 4\. Iniciar o Servidor de Desenvolvimento
+
+```bash
+npm run dev
+```
+
+O servidor será iniciado, geralmente em `http://localhost:3000`.
+
+-----
+
+## 📝 Processo de Configuração (Foco do Usuário)
+
+O principal objetivo desta aplicação web é gerar o arquivo de configuração para o sistema de IA.
+
+1.  O usuário acessa a seção **"Configuração"** da Landing Page.
+2.  Preenche um formulário simples com:
+      * **MQTT Broker IP/URL**
+      * **MQTT Broker Port**
+      * **Limites de Tempo para Alerta** (Ex: 5000 alertas de má postura)
+3.  O Front-end gera o objeto JSON e permite o download do arquivo **`preferences.json`**.
+4.  O usuário salva este arquivo na mesma pasta de execução do módulo `PosturAI-Python`.
+
+-----
+
+## 🤝 Contribuição
+
+Seu trabalho em design e desenvolvimento web é crucial para a experiência do usuário. Para contribuir:
+
+1.  Faça um **Fork** do Projeto.
+2.  Crie uma **Branch** para sua Feature (`git checkout -b feature/NpmeDaFeature`).
+3.  Commit suas Mudanças (`git commit -m 'add: Mensagem do Commmit'`).
+4.  Faça um **Push** para a Branch (`git push origin feature/NpmeDaFeature`).
+5.  Abra um **Pull Request**.
+
+-----
+
+## 📄 Licença
+
+Este projeto está sob a licença **MIT**. Consulte o arquivo `LICENSE` no repositório para mais detalhes.
+
+-----
+
+<div align="center">
+  Desenvolvido para a Global Solution 2025 da FIAP.
+  
+  Você pode encontrar mais informações sobre a Global Solution da FIAP no site oficial: <a href="https://www.fiap.com.br/graduacao/global-solution/?utm_term=&utm_campaign=GRAD+-+DSA&utm_source=adwords&utm_medium=ppc&hsa_acc=3358810376&hsa_cam=21102294227&hsa_grp=158449020381&hsa_ad=737370541126&hsa_src=g&hsa_tgt=dsa-2403784242683&hsa_kw=&hsa_mt=&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=21102294227&gbraid=0AAAAADqmiBBL0vsXCBVGF-uBG2qZC6mbY&gclid=CjwKCAiAlfvIBhA6EiwAcErpyZ9ifXZTOhMagASAJJAlFp0BM2fjwkvAjUnWgSHiFA5UMkvOpMlhyhoCflUQAvD_BwE">Global Solution FIAP</a>
+</div>
