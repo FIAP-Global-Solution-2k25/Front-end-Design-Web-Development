@@ -12,7 +12,7 @@
   --grain: none;
   --icon: none;
   --behind-gradient: none;
-  --behind-glow-color: rgba(125, 190, 255, 0.67);
+  --behind-glow-color: rgba(255, 255, 255, 0.67);
   --behind-glow-size: 25%;
   --inner-gradient: linear-gradient(145deg,#222 0%, #444 100%);
   --sunpillar-1: hsl(2, 100%, 73%);

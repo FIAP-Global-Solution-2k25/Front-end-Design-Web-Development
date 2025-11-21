@@ -18,7 +18,7 @@ const hexToRgb = hex => {
   return [r, g, b];
 };
 
-const vertex = `
+const vertex = /* glsl */ `
   attribute vec3 position;
   attribute vec4 random;
   attribute vec3 color;
@@ -63,7 +63,7 @@ const fragment = /* glsl */ `
   precision highp float;
   
   uniform float uTime;
-  uniform float uAlphaParticulas;
+  uniform float uAlphaParticles;
   varying vec4 vRandom;
   varying vec3 vColor;
   
@@ -71,7 +71,7 @@ const fragment = /* glsl */ `
     vec2 uv = gl_PointCoord.xy;
     float d = length(uv - vec2(0.5));
     
-    if(uAlphaParticulas < 0.5) {
+    if(uAlphaParticles < 0.5) {
       if(d > 0.5) {
         discard;
       }
@@ -85,12 +85,12 @@ const fragment = /* glsl */ `
 
 const Particulas = ({
   particleCount = 200,
-  Particulaspread = 10,
+  particleSpread = 10,
   speed = 0.1,
   particleColors,
-  moveParticulasOnHover = false,
+  moveParticlesOnHover = false,
   particleHoverFactor = 1,
-  alphaParticulas = false,
+  alphaParticles = false,
   particleBaseSize = 100,
   sizeRandomness = 1,
   cameraDistance = 20,
@@ -128,7 +128,7 @@ const Particulas = ({
       mouseRef.current = { x, y };
     };
 
-    if (moveParticulasOnHover) {
+    if (moveParticlesOnHover) {
       container.addEventListener('mousemove', handleMouseMove);
     }
 
@@ -164,16 +164,16 @@ const Particulas = ({
       fragment,
       uniforms: {
         uTime: { value: 0 },
-        uSpread: { value: Particulaspread },
+        uSpread: { value: particleSpread },
         uBaseSize: { value: particleBaseSize },
         uSizeRandomness: { value: sizeRandomness },
-        uAlphaParticulas: { value: alphaParticulas ? 1 : 0 }
+        uAlphaParticles: { value: alphaParticles ? 1 : 0 }
       },
       transparent: true,
       depthTest: false
     });
 
-    const Particulas = new Mesh(gl, { mode: gl.POINTS, geometry, program });
+    const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
     let animationFrameId;
     let lastTime = performance.now();
@@ -187,28 +187,28 @@ const Particulas = ({
 
       program.uniforms.uTime.value = elapsed * 0.001;
 
-      if (moveParticulasOnHover) {
-        Particulas.position.x = -mouseRef.current.x * particleHoverFactor;
-        Particulas.position.y = -mouseRef.current.y * particleHoverFactor;
+      if (moveParticlesOnHover) {
+        particles.position.x = -mouseRef.current.x * particleHoverFactor;
+        particles.position.y = -mouseRef.current.y * particleHoverFactor;
       } else {
-        Particulas.position.x = 0;
-        Particulas.position.y = 0;
+        particles.position.x = 0;
+        particles.position.y = 0;
       }
 
       if (!disableRotation) {
-        Particulas.rotation.x = Math.sin(elapsed * 0.0002) * 0.1;
-        Particulas.rotation.y = Math.cos(elapsed * 0.0005) * 0.15;
-        Particulas.rotation.z += 0.01 * speed;
+        particles.rotation.x = Math.sin(elapsed * 0.0002) * 0.1;
+        particles.rotation.y = Math.cos(elapsed * 0.0005) * 0.15;
+        particles.rotation.z += 0.01 * speed;
       }
 
-      renderer.render({ scene: Particulas, camera });
+      renderer.render({ scene: particles, camera });
     };
 
     animationFrameId = requestAnimationFrame(update);
 
     return () => {
       window.removeEventListener('resize', resize);
-      if (moveParticulasOnHover) {
+      if (moveParticlesOnHover) {
         container.removeEventListener('mousemove', handleMouseMove);
       }
       cancelAnimationFrame(animationFrameId);
@@ -216,13 +216,14 @@ const Particulas = ({
         container.removeChild(gl.canvas);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     particleCount,
-    Particulaspread,
+    particleSpread,
     speed,
-    moveParticulasOnHover,
+    moveParticlesOnHover,
     particleHoverFactor,
-    alphaParticulas,
+    alphaParticles,
     particleBaseSize,
     sizeRandomness,
     cameraDistance,

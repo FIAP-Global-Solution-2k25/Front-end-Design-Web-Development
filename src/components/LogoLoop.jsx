@@ -276,8 +276,8 @@ export const LogoLoop = memo(
           <div
           className={
             item.alt === "FIAP"
-              ? "h-[80px] w-[100px] flex items-center justify-center"   // logo da fiap maior
-              : "h-[70px] w-[60px] flex items-center justify-center"   // outras logos
+              ? "h-[180px] w-[120px] flex items-center justify-center"   // logo da fiap maior
+              : "h-[150px] w-[100px] flex items-center justify-center"   // outras logos
           }
         >
           <img

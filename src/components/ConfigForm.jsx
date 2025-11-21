@@ -19,7 +19,6 @@ const initialConfig = {
 export default function ConfigForm() {
   const [config, setConfig] = useState(initialConfig);
 
-  // sensibilidade (select)
   const handleSensibilidadeChange = (e) => {
     setConfig((prev) => ({
       ...prev,
@@ -27,7 +26,6 @@ export default function ConfigForm() {
     }));
   };
 
-  // campos de texto/numero dentro de hardware/interface
   const handleNestedChange = (section, field, parser = (v) => v) => (e) => {
     const value = parser(e.target.value);
     setConfig((prev) => ({
@@ -39,7 +37,6 @@ export default function ConfigForm() {
     }));
   };
 
-  // booleans (sim/não)
   const handleNestedBoolean = (section, field) => (e) => {
     const value = e.target.value === "true";
     setConfig((prev) => ({
@@ -51,68 +48,63 @@ export default function ConfigForm() {
     }));
   };
 
-  // Funções para Download do JSON
   const handleDownloadJson = () => {
-    // 1. Converte o objeto JavaScript em uma string JSON formatada (indentação 2)
-    const jsonString = JSON.stringify(config, null, 2); 
-    
-    // 2. Cria um Blob (bloco de dados) a partir da string JSON, definindo o tipo MIME
-    const blob = new Blob([jsonString], { type: 'application/json' }); 
-    
-    // 3. Cria um URL de objeto temporário
+    const jsonString = JSON.stringify(config, null, 2);
+    const blob = new Blob([jsonString], { type: "application/json" });
+
     const url = URL.createObjectURL(blob);
-    
-    // 4. Cria um link (<a>) em memória
-    const link = document.createElement('a');
+    const link = document.createElement("a");
+
     link.href = url;
-    
-    // 5. Define o nome do arquivo que será baixado
-    link.download = 'preferences.json'; 
-    
-    // 6. Simula o clique para iniciar o download
+    link.download = "preferences.json";
+
     document.body.appendChild(link);
     link.click();
-    
-    // 7. Limpeza: remove o link e revoga o URL de objeto para liberar memória
-    link.parentNode.removeChild(link);
-    URL.revokeObjectURL(url);
 
-    console.log("Download do arquivo 'preferences.json' iniciado.");
+    link.remove();
+    URL.revokeObjectURL(url);
   };
 
-  // Se quiser “enviar” depois, aqui já está o JSON pronto
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Config JSON pronto para submissão/processamento:", config);
-    // Removi o alert() e deixei apenas o log.
+    console.log("Config pronta:", config);
   };
+
+  const baseInput =
+    "w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white " +
+    "focus:outline-none focus:ring-2 focus:ring-cyan-400/70 " +
+    "hover:border-cyan-400 transition-all duration-500";
 
   return (
     <section className="w-full flex justify-center mt-20 px-4">
       <div className="w-full max-w-5xl bg-[#05060a] border border-white/10 rounded-3xl p-8 md:p-10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+
         <h2 className="text-3xl md:text-4xl font-bold text-cyan-400 mb-3">
           Configure sua experiência
         </h2>
+
         <p className="text-white/70 mb-8 max-w-2xl">
-          Responda às perguntas abaixo para gerar o arquivo de configuração do
-          PosturAI. As respostas são convertidas em um JSON automaticamente.
+          Responda para gerar automaticamente o arquivo JSON usado pelo PosturAI.
         </p>
 
         <form
           onSubmit={handleSubmit}
           className="grid gap-8 md:grid-cols-2 text-sm md:text-base"
         >
-          {/* COLUNA 1 – Sensibilidade & Hardware */}
+
+          {/* COLUNA 1 */}
           <div className="space-y-6">
+
             {/* Sensibilidade */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
                 Nível de sensibilidade da postura
               </label>
+
               <select
                 value={config.sensibilidade}
                 onChange={handleSensibilidadeChange}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+                className={baseInput}
               >
                 {config.niveis_sensibilidade.map((nivel) => (
                   <option key={nivel} value={nivel}>
@@ -120,67 +112,78 @@ export default function ConfigForm() {
                   </option>
                 ))}
               </select>
+
               <p className="text-xs text-white/50 mt-1">
-                <strong>Fraco</strong> = menos alertas,{" "}
-                <strong>Forte</strong> = corrige qualquer desvio.
+                Define quanto o sistema será rígido para detectar desvios.
               </p>
             </div>
 
-            {/* Tem cadeira IoT */}
+            {/* Cadeira IoT */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
                 Você está usando uma cadeira IoT?
               </label>
+
               <select
                 value={String(config.hardware.tem_cadeira_iot)}
                 onChange={handleNestedBoolean("hardware", "tem_cadeira_iot")}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+                className={baseInput}
               >
                 <option value="false">Não</option>
                 <option value="true">Sim</option>
               </select>
+
               <p className="text-xs text-white/50 mt-1">
-                Se não tiver cadeira inteligente, o PosturAI funciona usando
-                apenas a câmera.
+                Ative apenas se estiver usando a cadeira inteligente integrada.
               </p>
             </div>
 
-            {/* IP da cadeira */}
+            {/* IP */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
                 IP / Endereço da cadeira IoT
               </label>
+
               <input
                 type="text"
                 value={config.hardware.ip_cadeira_iot}
                 onChange={handleNestedChange("hardware", "ip_cadeira_iot")}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
-                placeholder="0.tcp.sa.ngrok.io:13950"
+                className={baseInput}
               />
+
               <p className="text-xs text-white/50 mt-1">
-                Use o endereço público ou IP local da cadeira.
+                Endereço usado para comunicação entre o software e a cadeira.
               </p>
             </div>
-            
-            {/* ID da cadeira */}
+
+            {/* ID */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
                 ID da cadeira IoT
               </label>
+
               <input
                 type="text"
                 value={config.hardware.id_cadeira_iot}
                 onChange={handleNestedChange("hardware", "id_cadeira_iot")}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
-                placeholder="Chair:001"
+                className={baseInput}
               />
-            </div>
 
-            {/* Atraso de vibração */}
+              <p className="text-xs text-white/50 mt-1">
+                Identificador único da sua cadeira no sistema.
+              </p>
+            </div>
+          </div>
+
+          {/* COLUNA 2 */}
+          <div className="space-y-6">
+
+            {/* Atraso */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
-                Atraso para vibrar após detectar má postura (segundos)
+                Atraso para vibrar (ms)
               </label>
+
               <input
                 type="number"
                 min={0}
@@ -190,18 +193,20 @@ export default function ConfigForm() {
                   "atraso_vibracao",
                   (v) => Number(v) || 0
                 )}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+                className={baseInput}
               />
-            </div>
-          </div>
 
-          {/* COLUNA 2 – Hardware extra & Interface */}
-          <div className="space-y-6">
-            {/* ID da Webcam */}
+              <p className="text-xs text-white/50 mt-1">
+                Tempo de espera antes da cadeira emitir a vibração corretiva.
+              </p>
+            </div>
+
+            {/* Webcam */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
-                ID da Webcam (0 para a câmera padrão)
+                ID da Webcam
               </label>
+
               <input
                 type="number"
                 min={0}
@@ -211,63 +216,68 @@ export default function ConfigForm() {
                   "id_webcam",
                   (v) => Number(v) || 0
                 )}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+                className={baseInput}
               />
+
               <p className="text-xs text-white/50 mt-1">
-                Geralmente 0 é a câmera embutida no notebook.
+                Alterado apenas se você utilizar uma webcam alternativa.
               </p>
             </div>
 
-            {/* Janela sempre no topo */}
+            {/* Sempre no topo */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
-                Manter a janela do PosturAI sempre no topo?
+                Manter janela sempre no topo?
               </label>
+
               <select
                 value={String(config.interface.janela_sempre_topo)}
-                onChange={handleNestedBoolean(
-                  "interface",
-                  "janela_sempre_topo"
-                )}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+                onChange={handleNestedBoolean("interface", "janela_sempre_topo")}
+                className={baseInput}
               >
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
+
+              <p className="text-xs text-white/50 mt-1">
+                Mantém o PosturAI acima de outros aplicativos enquanto usado.
+              </p>
             </div>
 
-            {/* Gerar gráfico ao encerrar */}
+            {/* Gráfico */}
             <div>
               <label className="block font-medium mb-2 text-white/90">
-                Gerar gráfico de desempenho ao encerrar a sessão?
+                Gerar gráfico ao encerrar sessão?
               </label>
+
               <select
-                value={String(
-                  config.interface.gerar_grafico_apos_encerramento
-                )}
+                value={String(config.interface.gerar_grafico_apos_encerramento)}
                 onChange={handleNestedBoolean(
                   "interface",
                   "gerar_grafico_apos_encerramento"
                 )}
-                className="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/70"
+                className={baseInput}
               >
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
+
+              <p className="text-xs text-white/50 mt-1">
+                Gera um relatório visual da sua postura ao final da sessão.
+              </p>
             </div>
           </div>
 
-          {/* BOTÕES – largura total */}
+          {/* BOTÕES */}
           <div className="md:col-span-2 flex justify-end mt-2 space-x-4">
-            {/* BOTÃO DE DOWNLOAD */}
             <button
-              type="button" // Important: use type="button" to prevent form submission
+              type="button"
               onClick={handleDownloadJson}
-              className="px-6 py-2.5 rounded-xl border border-cyan-500 text-cyan-400 font-semibold transition-colors duration-200 hover:bg-cyan-500/10 shadow-lg"
+              className="px-6 py-2.5 rounded-xl border border-cyan-500 text-cyan-400 font-semibold transition-all duration-200 hover:bg-cyan-500/10 shadow-lg"
             >
               Baixar Arquivo .json
             </button>
-            {/* BOTÃO DE SUBMISSÃO */}
+
             <button
               type="submit"
               className="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-colors duration-200 shadow-lg"
@@ -277,11 +287,12 @@ export default function ConfigForm() {
           </div>
         </form>
 
-        {/* JSON GERADO */}
+        {/* PREVIEW */}
         <div className="mt-8">
           <h3 className="text-lg font-semibold text-white/90 mb-2">
             JSON gerado (Pré-visualização)
           </h3>
+
           <pre className="w-full bg-black/70 border border-white/10 rounded-2xl p-4 text-xs md:text-sm text-green-300 overflow-x-auto">
             {JSON.stringify(config, null, 4)}
           </pre>
