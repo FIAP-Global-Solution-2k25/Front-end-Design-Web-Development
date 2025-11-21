@@ -58,17 +58,15 @@ export default function Tutorial() {
 
             {/* Vídeo sem parecer YouTube */}
             <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-[0_0_25px_rgba(150,180,255,0.4)]">
-              <iframe
-                width="100%"
-                height="500"
-                src="https://www.youtube.com/embed/B-DyjLL_hKs"
-                title="Tutorial PosturAI"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="rounded-2xl border border-white/10 shadow-xl"
-            ></iframe>
-            </div>
+              <iframe 
+              className="w-full h-full" 
+              src="https://www.youtube.com/embed/2D0FcLo7t-I?si=3rD5QfrxunvFzARN&controls=0&loop=1&playlist=2D0FcLo7t-I&modestbranding=1&rel=0" 
+              title="Tutorial PosturAI" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; encrypted-media; gyroscope" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen></iframe>
+              </div>
 
             <p className="text-white/60 text-center max-w-xl text-lg">
               Este vídeo explica passo a passo como instalar, configurar e começar a usar o PosturAI na sua rotina.

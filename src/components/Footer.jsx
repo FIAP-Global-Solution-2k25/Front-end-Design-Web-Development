@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Logo from "../assets/PosturAI-LOGO.png";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 

@@ -1,6 +1,5 @@
 import Stack from "./Stack";
 
-// importa as logos
 import reactLogo from "../assets/simbolos/React.png";
 import gsapLogo from "../assets/simbolos/GSAP.png";
 import tailwindLogo from "../assets/simbolos/tailwind.png";

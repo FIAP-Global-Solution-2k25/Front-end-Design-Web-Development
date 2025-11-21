@@ -68,7 +68,7 @@ export default function Home() {
         </h1>
 
         <p className="max-w-3xl text-lg md:text-2xl text-white/80">
-          O PosturAI monitora sua postura em tempo real usando Inteligência Artificial, prevenindo dores, lesões e melhorando sua qualidade de vida.
+          <b><u>Diga Adeus às Dores nas Costas!</u></b> Nossa tecnologia IA monitora e corrige seus hábitos em tempo real, elevando sua qualidade de vida.
         </p>
 
         {/* BOTÕES */}
@@ -102,7 +102,18 @@ export default function Home() {
             {/* SAIBA MAIS */}
             <CartaoResponsivo className="px-0 py-0">
             <a
-                href="#como-funciona"
+                href="#"
+                onClick={(e) => {
+                e.preventDefault();
+                gsap.to(window, {
+                    duration: 1.4,
+                    ease: "slow(0.7, 1.5, 0.7)",
+                    scrollTo: {
+                    y: "#como-funciona",
+                    offsetY: 80
+                    }
+                });
+                }}
                 className="relative px-11 py-5 text-xl text-center text-white bg- backdrop-blur-lg border hover:border-[#AFC7FF] border-white/20 rounded-xl transition-all duration-300 flex items-center justify-center"
             >
                 Saiba Mais

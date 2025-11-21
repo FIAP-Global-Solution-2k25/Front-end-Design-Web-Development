@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-import CartaoResponsivo from "./CartaoResponsivo";
 import Particulas from "./Particulas";
 import ScrollReveal from "./ScrollReveal";
 
