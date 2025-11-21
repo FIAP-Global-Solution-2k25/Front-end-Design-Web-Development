@@ -1,5 +1,8 @@
 <p align="center">
   # 🌐 PosturAI — Landing Page Oficial
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/FIAP%20Global%20Solution%202K25-2%C2%BA%20Semestre-blue?style=for-the-badge&logo=github&logoColor=white" alt="Global Solution 2K25 Badge">
 </p>
 
@@ -67,7 +70,7 @@ Para ter a Landing Page rodando em sua máquina, siga os passos abaixo:
 
 1.  Clone o repositório:
     ```bash
-    git clone <url-do-repositório>
+    git clone [https://github.com/FIAP-Global-Solution-2k25/PosturAI-Website.git](https://github.com/FIAP-Global-Solution-2k25/PosturAI-Website.git)
     ```
 2.  Navegue até o diretório do projeto:
     ```bash
