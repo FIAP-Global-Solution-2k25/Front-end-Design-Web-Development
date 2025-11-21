@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/FIAP%20Global%20Solution%202K25-Landing%20Page-007ACC?style=for-the-badge&logo=react&logoColor=white" alt="Global Solution 2K25 Badge">
 </p>
 
-> Repositório dedicado ao desenvolvimento da **Landing Page Oficial** do projeto PosturAI. Esta página serve como ponto central para apresentação da solução, download de arquivos e fornecimento de instruções detalhadas de configuração para o usuário final.
+> Repositório dedicado ao desenvolvimento da [**Landing Page Oficial**](https://posturai-jet.vercel.app/) do projeto PosturAI. Esta página serve como ponto central para apresentação da solução, download de arquivos e fornecimento de instruções detalhadas de configuração para o usuário final.
 
 ---
 
